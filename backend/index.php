@@ -21,5 +21,13 @@ $app->add(function ($request, $handler) {
         ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// Route pour récupérer toutes les oeuvres
+$app->get('/artworks', function ($request, $response) {
+    require_once 'controllers/ArtworksController.php';
+    $controller = new ArtworksController();
+    $artworks = $controller->getAllArtworks();
+    return $response->withJson($artworks);
+});
+
 // Exécution de l'application
 $app->run();
